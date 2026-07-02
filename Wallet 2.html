@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSC Study Wallet 
+    by Tansim😎v2.0</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Premium UI Fonts - Inter for English, Hind Siliguri for Bangla */
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', 'Hind Siliguri', sans-serif; 
+            background: radial-gradient(circle at 50% 0%, #111827, #030712);
+            color: #f3f4f6;
+            letter-spacing: -0.01em;
+        }
+
+        /* Smooth Custom Scrollbar for Phone */
+        .custom-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col custom-scroll antialiased">
+
+    <!-- Premium Header -->
+    <header class="bg-gray-950/80 backdrop-blur-md border-b border-gray-800/60 p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3.5">
+                <div class="bg-gradient-to-tr from-indigo-500 to-violet-600 p-2.5 rounded-xl shadow-lg shadow-indigo-500/10">
+                    <i class="fa-solid fa-layers text-xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">TARGET BUET</h1>
+                    <p class="text-[11px] text-indigo-400 font-medium uppercase tracking-wider">HSC Central Database v2.0</p>
+                </div>
+            </div>
+            
+            <!-- Modern Minimalist Search Bar -->
+            <div class="relative w-full md:w-80">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-500 text-xs"></i>
+                <input type="text" id="searchBar" oninput="renderApp()" placeholder="Search notes..." class="w-full bg-gray-900/60 text-gray-200 pl-10 pr-4 py-2.5 rounded-xl border border-gray-800 focus:outline-none focus:border-indigo-500 text-sm transition-all placeholder-gray-500">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto p-4 md:p-6 flex-grow w-full space-y-6">
+        
+        <!-- Premium Live Statistics -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl shadow-sm">
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wider">Total Modules</p>
+                <h3 id="statTotal" class="text-2xl font-bold text-gray-100 mt-1">00</h3>
+            </div>
+            <div class="bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl shadow-sm border-l-2 border-l-emerald-500">
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wider">Biology </p>
+                <h3 id="statBio" class="text-2xl font-bold text-emerald-400 mt-1">00</h3>
+            </div>
+            <div class="bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl shadow-sm border-l-2 border-l-cyan-500">
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wider">Chemistry </p>
+                <h3 id="statChem" class="text-2xl font-bold text-cyan-400 mt-1">00</h3>
+            </div>
+            <div class="bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl shadow-sm border-l-2 border-l-amber-500">
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wider">Physics </p>
+                <h3 id="statPhys" class="text-2xl font-bold text-amber-400 mt-1">00</h3>
+            </div>
+        </div>
+
+        <!-- App Layout Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Input Panel -->
+            <div class="lg:col-span-1">
+                <div class="bg-gray-900/30 border border-gray-800/60 rounded-2xl p-5 shadow-xl relative overflow-hidden backdrop-blur-sm">
+                    <h2 class="text-sm font-bold mb-4 flex items-center gap-2 text-gray-300 uppercase tracking-wider">
+                        <i class="fa-solid fa-pen-fancy text-indigo-400 text-xs"></i> Create New Note
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[11px] text-gray-400 font-bold uppercase tracking-wider mb-1.5">Title of The Note</label>
+                            <input type="text" id="noteTitle" placeholder="Example: কোষ রসায়ন cq নোট" class="w-full bg-gray-950 text-gray-100 px-4 py-3 rounded-xl border border-gray-800/80 focus:outline-none focus:border-indigo-500 text-sm transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-gray-400 font-bold uppercase tracking-wider mb-1.5">Select Catagory</label>
+                            <select id="noteSubject" class="w-full bg-gray-950 text-gray-200 px-4 py-3 rounded-xl border border-gray-800/80 focus:outline-none focus:border-indigo-500 text-sm transition-all">
+                                <option value="Biology">🧬 Biology (জীববিজ্ঞান)</option>
+                                <option value="Chemistry">🧪 Chemistry (রসায়ন)</option>
+                                <option value="Physics">⚡ Physics (পদার্থবিজ্ঞান)</option>
+                                <option value="Others">🌐 Others (অন্যান্য)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-gray-400 font-bold uppercase tracking-wider mb-1.5">Details of note(Drop your note here... )</label>
+                            <textarea id="noteContent" rows="10" placeholder="Drop file..." class="w-full bg-gray-950 text-gray-300 p-4 rounded-xl border border-gray-800/80 focus:outline-none focus:border-indigo-500 text-xs custom-scroll resize-none tracking-wide leading-relaxed font-normal"></textarea>
+                        </div>
+                        <button onclick="injectData()" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold py-3 rounded-xl shadow-lg shadow-indigo-600/10 transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i>Save it
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notes Viewer Panel -->
+            <div class="lg:col-span-2 flex flex-col gap-4">
+                
+                <!-- Modern Minimalist Filter Tabs -->
+                <div class="flex gap-2 overflow-x-auto pb-1 custom-scroll">
+                    <button onclick="switchSystem('All')" id="tab-All" class="px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/10">All Systems</button>
+                    <button onclick="switchSystem('Biology')" id="tab-Biology" class="px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all bg-gray-900/50 text-gray-400 border border-gray-800/60 hover:text-emerald-400">Biology</button>
+                    <button onclick="switchSystem('Chemistry')" id="tab-Chemistry" class="px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all bg-gray-900/50 text-gray-400 border border-gray-800/60 hover:text-cyan-400">Chemistry</button>
+                    <button onclick="switchSystem('Physics')" id="tab-Physics" class="px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all bg-gray-900/50 text-gray-400 border border-gray-800/60 hover:text-amber-400">Physics</button>
+                    <button onclick="switchSystem('Others')" id="tab-Others" class="px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all bg-gray-900/50 text-gray-400 border border-gray-800/60 hover:text-gray-200">Others</button>
+                </div>
+
+                <!-- Notes List Output Container -->
+                <div id="terminalContainer" class="space-y-4 custom-scroll max-h-[70vh] overflow-y-auto pr-1">
+                    <!-- Cards will inject here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- App Engine JavaScript -->
+    <script>
+        let currentSystem = 'All';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderApp();
+        });
+
+        function injectData() {
+            const title = document.getElementById('noteTitle').value.trim();
+            const subject = document.getElementById('noteSubject').value;
+            const content = document.getElementById('noteContent').value.trim();
+
+            if (!title || !content) {
+                alert('You have fill both!');
+                return;
+            }
+
+            const dataNode = {
+                id: 'ID_' + Date.now().toString().slice(-6),
+                title: title,
+                subject: subject,
+                content: content,
+                timestamp: new Date().toLocaleDateString('bn-BD')
+            };
+
+            let database = JSON.parse(localStorage.getItem('premium_notebook_db')) || [];
+            database.unshift(dataNode);
+            localStorage.setItem('premium_notebook_db', JSON.stringify(database));
+
+            document.getElementById('noteTitle').value = '';
+            document.getElementById('noteContent').value = '';
+
+            renderApp();
+        }
+
+        function purgeNode(id) {
+            if(confirm('Are you sure to delete this?')) {
+                let database = JSON.parse(localStorage.getItem('premium_notebook_db')) || [];
+                database = database.filter(node => node.id !== id);
+                localStorage.setItem('premium_notebook_db', JSON.stringify(database));
+                renderApp();
+            }
+        }
+
+        function switchSystem(systemName) {
+            currentSystem = systemName;
+            const tabs = ['All', 'Biology', 'Chemistry', 'Physics', 'Others'];
+            tabs.forEach(tab => {
+                const button = document.getElementById(`tab-${tab}`);
+                if(tab === systemName) {
+                    button.className = `px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all ${
+                        tab === 'Biology' ? 'bg-emerald-600 text-white' : 
+                        tab === 'Chemistry' ? 'bg-cyan-600 text-white' : 
+                        tab === 'Physics' ? 'bg-amber-600 text-white' : 
+                        'bg-indigo-600 text-white'
+                    }`;
+                } else {
+                    button.className = "px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all bg-gray-900/50 text-gray-400 border border-gray-800/60 hover:text-indigo-400";
+                }
+            });
+            renderApp();
+        }
+
+        function renderApp() {
+            const container = document.getElementById('terminalContainer');
+            const query = document.getElementById('searchBar').value.toLowerCase();
+            let db = JSON.parse(localStorage.getItem('premium_notebook_db')) || [];
+
+            // Update Statistics
+            document.getElementById('statTotal').innerText = String(db.length).padStart(2, '0');
+            document.getElementById('statBio').innerText = String(db.filter(n => n.subject === 'Biology').length).padStart(2, '0');
+            document.getElementById('statChem').innerText = String(db.filter(n => n.subject === 'Chemistry').length).padStart(2, '0');
+            document.getElementById('statPhys').innerText = String(db.filter(n => n.subject === 'Physics').length).padStart(2, '0');
+
+            if (currentSystem !== 'All') {
+                db = db.filter(node => node.subject === currentSystem);
+            }
+            if (query) {
+                db = db.filter(node => node.title.toLowerCase().includes(query) || node.content.toLowerCase().includes(query));
+            }
+
+            if (db.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-gray-900/20 border border-dashed border-gray-800 rounded-2xl p-12 text-center text-gray-500">
+                        <i class="fa-regular fa-folder text-2xl mb-2 text-gray-600 block"></i>
+                        <p class="text-xs tracking-wide text-gray-500">[ Empty database!Add new note ]</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = db.map(node => {
+                let tagStyle = 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
+                if (node.subject === 'Biology') tagStyle = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+                if (node.subject === 'Chemistry') tagStyle = 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
+                if (node.subject === 'Physics') tagStyle = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+
+                return `
+                    <div class="bg-gray-900/40 border border-gray-800/80 rounded-2xl p-5 transition-all duration-200">
+                        <div class="flex justify-between items-start gap-4 mb-3">
+                            <div>
+                                <span class="text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-md border ${tagStyle}">${node.subject}</span>
+                                <h3 class="text-base font-semibold mt-2 text-gray-200">${node.title}</h3>
+                            </div>
+                            <button onclick="purgeNode('${node.id}')" class="text-gray-600 hover:text-red-400 p-1.5 rounded-lg transition-all">
+                                <i class="fa-regular fa-trash-can text-sm"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Premium Reading Container -->
+                        <div class="bg-gray-950/90 border border-gray-800/40 rounded-xl p-4 text-sm text-gray-300 whitespace-pre-wrap font-normal max-h-64 overflow-y-auto custom-scroll tracking-wide leading-relaxed">
+                            ${secureHTML(node.content)}
+                        </div>
+                        
+                        <div class="text-[10px] text-gray-500 mt-2.5 flex justify-between items-center font-medium">
+                            <span>ID: ${node.id}</span>
+                            <span><i class="fa-regular fa-calendar mr-1"></i> ${node.timestamp}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function secureHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char] || char)
+            );
+        }
+    </script>
+</body>
+</html>
